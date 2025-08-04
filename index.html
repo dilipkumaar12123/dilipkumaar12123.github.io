@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dilipkumaar Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html, body {scroll-behavior: smooth;
+     font-family: sans-serif;}
+
+    /* ----------------- Section 1: Intro ----------------- */
+    #intro {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    #intro::before {
+      content:"";
+      position:absolute;
+      top:0;left:0;
+      width:100%;height:100%;
+      background:rgba(0,0,0,0.6);
+      z-index:1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      padding: 40px;
+      flex-wrap: wrap;
+      color: #fff;
+      max-width: 1200px;
+    }
+
+    .profile-pic img {
+      max-width: 320px;
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .text-section {
+      max-width: 600px;
+      text-align: left;
+      flex: 1;
+    }
+
+    .text-section h1 {
+      font-size: 60px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .text-section p {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    .text-section .lorem {
+      font-size: 16px;
+      text-align: justify;
+      margin-bottom: 30px;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    .menu-section ul {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+    .menu-section ul li {
+      list-style: none;
+      width: 60px;
+      height: 60px;
+      background: white;
+      border-radius: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.5s;
+      position: relative;
+      cursor: pointer;
+    }
+    .menu-section ul li::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 60px;
+      background: linear-gradient(45deg, var(--i), var(--j));
+      opacity: 0;
+      transition: 0.5s;
+    }
+    .menu-section ul li:hover {width:180px;}
+    .menu-section ul li:hover::before {opacity:1;}
+    .menu-section ul li ion-icon {
+      color:#777;font-size:1.75em;transition:0.5s;
+    }
+    .menu-section ul li:hover ion-icon {transform:scale(0);color:#fff;}
+    .menu-section ul li .title {
+      position:absolute;color:#fff;font-size:1.1em;
+      text-transform:uppercase;transform:scale(0);transition:0.5s;
+    }
+    .menu-section ul li:hover .title {transform:scale(1);transition-delay:0.25s;}
+    .menu-section ul li a {position:absolute;inset:0;z-index:2;}
+
+    @media(max-width:900px){
+      .content {flex-direction:column;text-align:center;gap:30px;padding:20px;}
+      .profile-pic img {max-width:220px;}
+      .text-section h1 {font-size:40px;}
+      .text-section p {font-size:18px;}
+    }
+    @media(max-width:500px){
+      #intro {padding:20px;min-height:auto;}
+      .content {gap:20px;}
+      .text-section .lorem {font-size:14px;}
+    }
+
+    /* ----------------- Section 2: Tools & Certifications ----------------- */
+    #tools {
+      width: 100%;
+      background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+      padding: 80px 0;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .gallery {
+      background: transparent;
+      width: 80%;
+    }
+
+    .gallery-cell {
+      width: 200px;
+      height: 200px;
+      margin-right: 10px;
+      background: #fff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .gallery-cell img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      justify-items: center;
+    }
+    @media (max-width: 900px) {.grid {grid-template-columns: repeat(2, 1fr);}}
+    @media (max-width: 600px) {.grid {grid-template-columns: 1fr;}}
+
+    .card {
+      width: 200px;
+      height: 250px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+    .card:hover .card-inner {transform: rotateY(180deg);}
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-radius: 0.5rem;
+      border: 1px solid #e5e7eb;
+      background: #fff;
+      padding: 15px;
+      box-sizing: border-box;
+    }
+
+    .card-front {
+      align-items: flex-start;
+      font-weight: bold;
+      font-size: 25px;
+      color: #000;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+    .card-back {
+      background: #c8c5ce;
+      color: #fff;
+      transform: rotateY(180deg);
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card-back img.icon {
+      width: 100px;
+      height: 100px;
+      margin-top: 20px;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: #fff;
+      color: #1d8cdb;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 14px;
+      transition: background 0.3s;
+      margin-bottom: 10px;
+    }
+    .btn:hover {background:#e0d7ff;}
+
+    /* Fade animations */
+    .fade-element {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .fade-element.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* ===== Timeline Section (Scoped) ===== */
+#projects-timeline {
+  font-family: 'Open Sans', sans-serif;
+  background: #fff;
+  padding: 0 4em;
+}
+
+#projects-timeline main {
+  min-width: 300px;
+  max-width: 700px;
+  margin: auto;
+}
+
+#projects-timeline .heading {
+  font-size: 60px;
+  font-weight: bold;
+  color: purple;
+  margin: 20px 0 20px 0;
+  text-align: left;
+}
+
+#projects-timeline section {
+  font-size: 1em;
+  line-height: 1.75em;
+  border-top: 3px solid;
+  border-image: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+  border-image-slice: 1;
+  border-width: 3px;
+  margin: 0;
+  padding: 40px;
+  counter-increment: section;
+  position: relative;
+  color: #34435E;
+}
+
+#projects-timeline section h2 {
+  margin: 0 0 10px;
+  font-size: 1.5em;
+  color: #34435E;
+}
+
+#projects-timeline section ul {
+  margin: 0 0 20px 20px;
+  padding: 0;
+  list-style-type: disc;
+}
+
+#projects-timeline section .images {
+  display: flex;
+  gap: 10px;
+}
+
+#projects-timeline section .images img {
+  width: 30%;
+  border-radius: 5px;
+}
+
+#projects-timeline section:before {
+  content: counter(section);
+  position: absolute;
+  border-radius: 50%;
+  padding: 10px;
+  height: 1.25em;
+  width: 1.25em;
+  background-color: #34435E;
+  text-align: center;
+  line-height: 1.25em;
+  color: #ffffff;
+  font-size: 1em;
+}
+
+/* Odd sections */
+#projects-timeline section:nth-child(odd) {
+  border-right: 3px solid;
+  padding-left: 0;
+}
+
+#projects-timeline section:nth-child(odd):before {
+  left: 100%;
+  margin-left: -20px;
+}
+
+/* Even sections */
+#projects-timeline section:nth-child(even) {
+  border-left: 3px solid;
+  padding-right: 0;
+}
+
+#projects-timeline section:nth-child(even):before {
+  right: 100%;
+  margin-right: -20px;
+}
+
+/* First and last section adjustments */
+#projects-timeline section:first-of-type {
+  border-top: 0;
+}
+
+#projects-timeline section:last-of-type {
+  border-bottom: 3px solid;
+  border-image: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+  border-image-slice: 1;
+}
+
+/* Contact Section */
+#contact {
+  background: #262626; /* Dark background for contrast */
+  padding: 80px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#contact ul {
+  display: flex;
+  gap: 20px;
+}
+
+#contact ul li {
+  list-style: none;
+}
+
+#contact ul li a {
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
+  text-align: center;
+  line-height: 80px;
+  font-size: 35px;
+  margin: 0 10px;
+  display: block;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #fff;
+  z-index: 1;
+  transition: 0.3s ease;
+}
+
+#contact ul li a .icon {
+  position: relative;
+  color: #262626;
+  transition: 0.5s;
+  z-index: 3;
+}
+
+#contact ul li a:hover .icon {
+  color: #fff;
+  transform: rotateY(360deg);
+}
+
+#contact ul li a:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f00;
+  transition: 0.5s;
+  z-index: 2;
+}
+
+#contact ul li a:hover:before {
+  top: 0;
+}
+
+/* Individual Icon Backgrounds */
+#contact ul li:nth-child(1) a:before { background: #0077b5; }  /* LinkedIn */
+#contact ul li:nth-child(2) a:before { background: #ea4335; }  /* Email */
+#contact ul li:nth-child(3) a:before { background: #25d366; }  /* WhatsApp */
+#contact ul li:nth-child(4) a:before { background: #333; }     /* GitHub */
+  </style>
+</head>
+<body>
+
+  <!-- Section 1 -->
+  <section id="intro">
+    <div class="content fade-element">
+      <div class="profile-pic">
+        <img src="images/IMG_9397.JPG" alt="Profile Photo">
+      </div>
+      <div class="text-section">
+        <h1>DILIPKUMAAR</h1>
+        <p>Econometrics | Data Science | Research</p>
+        <p class="lorem">
+          I am an Economics post‑graduate from the Madras School of Economics, specializing in Environmental Economics with expertise in Regression, Visualization, and Research. I focus on using data‑driven approaches to solve real‑world policy challenges and deliver actionable insights.
+        </p>
+        <div class="menu-section">
+          <ul>
+            <li style="--i:#80FF72;--j:#7EE8FA">
+              <a href="#tools"></a>
+              <span class="icon"><ion-icon name="construct-outline"></ion-icon></span>
+              <span class="title">Tools</span>
+            </li>
+            <li style="--i:#a955ff;--j:#ea51ff">
+              <a href="#projects-timeline"></a>
+              <span class="icon"><ion-icon name="folder-outline"></ion-icon></span>
+              <span class="title">Projects</span>
+            </li>
+            <li style="--i:#56CCF2;--j:#2F80ED">
+              <a href="https://drive.google.com/file/d/194rIpOjtW0gvqu0I5h2o7Zb6lUcdiDU1/view?usp=sharing" target="_blank"></a>
+              <span class="icon"><ion-icon name="document-text-outline"></ion-icon></span>
+              <span class="title">Resume</span>
+            </li>
+            <li style="--i:#FF9966;--j:#FF5E62">
+              <a href="#contact"></a>
+              <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+              <span class="title">Contact</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="tools">
+    <h2 class="fade-element">Tools I Have Worked With:</h2>
+
+    <div class="gallery js-flickity fade-element"
+      data-flickity-options='{ "wrapAround": true, "autoPlay": 2000, "pauseAutoPlayOnHover": false }'>
+
+      <div class="gallery-cell"><img src="https://images.seeklogo.com/logo-png/20/2/python-logo-png_seeklogo-207405.png" alt="Python"></div>
+      <div class="gallery-cell"><img src="https://images.seeklogo.com/logo-png/27/2/r-project-logo-png_seeklogo-273836.png" alt="R"></div>
+      <div class="gallery-cell"><img src="https://cdn-icons-png.flaticon.com/512/4299/4299956.png" alt="SQL"></div>
+      <div class="gallery-cell"><img src="https://iconlogovector.com/uploads/images/2025/03/sm-67ce9a300bf90-Stata.webp" alt="Stata"></div>
+      <div class="gallery-cell"><img src="https://5.imimg.com/data5/SELLER/Default/2023/8/334671144/VY/QJ/XC/59100356/download.png" alt="SPSS"></div>
+      <div class="gallery-cell"><img src="https://logos-world.net/wp-content/uploads/2020/11/GitHub-Logo.png" alt="GitHub"></div>
+      <div class="gallery-cell"><img src="https://logos-world.net/wp-content/uploads/2021/10/Tableau-Logo.png" alt="Tableau"></div>
+      <div class="gallery-cell"><img src="https://images.seeklogo.com/logo-png/40/1/power-bi-microsoft-logo-png_seeklogo-400711.png" alt="Power BI"></div>
+      <div class="gallery-cell"><img src="https://download.logo.wine/logo/Microsoft_Excel/Microsoft_Excel-Logo.wine.png" alt="Excel"></div>
+    </div>
+
+    <div style="height: 120px;"></div>
+    <h2 class="fade-element">Certifications</h2>
+
+    <div class="grid">
+      <div class="card fade-element">
+        <div class="card-inner">
+          <div class="card-front">Associate Data Scientist in Python</div>
+          <div class="card-back">
+            <img src="icons/datacampicon.jpg" class="icon" alt="Certificate Icon">
+            <a href="https://www.datacamp.com/statement-of-accomplishment/track/8e43a8f57e4721e1b4674b6d571a5feea0bce0a1?raw=1" target="_blank" class="btn">View Certificate</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card fade-element">
+        <div class="card-inner">
+          <div class="card-front">Associate Data Scientist in R</div>
+          <div class="card-back">
+            <img src="icons/datacampicon.jpg" class="icon" alt="Certificate Icon">
+            <a href="https://www.datacamp.com/statement-of-accomplishment/track/e06952498caed60fcb5acd761bf497fdba15424b?raw=1" target="_blank" class="btn">View Certificate</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card fade-element">
+        <div class="card-inner">
+          <div class="card-front">Google Data Analytics</div>
+          <div class="card-back">
+            <img src="icons/Google__G__logo.svg.webp" class="icon" alt="Certificate Icon">
+            <a href="https://www.coursera.org/account/accomplishments/specialization/3J3D5D465LX7?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=prof" target="_blank" class="btn">View Certificate</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card fade-element">
+        <div class="card-inner">
+          <div class="card-front">Complete Python Bootcamp</div>
+          <div class="card-back">
+            <img src="https://images.seeklogo.com/logo-png/40/1/udemy-wordmark-logo-png_seeklogo-409220.png" class="icon" alt="Certificate Icon">
+            <a href="https://www.udemy.com/course/complete-python-bootcamp" target="_blank" class="btn">View Certificate</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card fade-element">
+        <div class="card-inner">
+          <div class="card-front">Intermediate SQL</div>
+          <div class="card-back">
+            <img src="https://scorebeyond.com/wp-content/uploads/2024/01/datacamp-learning-platform-logo.jpg" class="icon" alt="Certificate Icon">
+            <a href="https://www.datacamp.com/statement-of-accomplishment/course/510d482b26a37731b41c4336cce2b72c6393aed7?raw=1" target="_blank" class="btn">View Certificate</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card fade-element">
+        <div class="card-inner">
+          <div class="card-front">Introduction to Tensor Flow</div>
+          <div class="card-back">
+            <img src="https://scorebeyond.com/wp-content/uploads/2024/01/datacamp-learning-platform-logo.jpg" class="icon" alt="Certificate Icon">
+            <a href="https://www.datacamp.com/statement-of-accomplishment/course/fff0f2579358f25f49e697804a17dc243986ac4e?raw=1" target="_blank" class="btn">View Certificate</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Section 3 -->
+<section id="projects-timeline">
+  <main>
+
+    <!-- Project 1 -->
+    <section>
+      <h1 class="heading">Projects</h1>
+      <h2>Vehicular air pollution and human health impacts</h2>
+      <ul>
+        <li>Focused on Million+ cities and its demographics.</li>
+        <li>Used mixed effect models to calculate health damages.</li>
+        <li>Visualized variables to understand extent of detrimental impact.</li>
+      </ul>
+      <div class="images">
+        <img src="images/Screenshot 2025-08-02 220039.png" alt="Sample Image">
+        <img src="images/Screenshot 2025-08-02 220107.png" alt="Sample Image">
+        <img src="images/Screenshot 2025-08-02 220504.png" alt="Sample Image">
+      </div>
+    </section>
+
+    <!-- Project 2 -->
+    <section>
+      <h2>Time Series - Housing Price Index</h2>
+      <ul>
+        <li>Checked for stationarity and seasonality.</li>
+        <li>Analyzed 15-year quarterly dataset from RBI and predicted for the next 5 quarters.</li>
+        <li>Estimated housing price index trends using ARIMA model.</li>
+      </ul>
+      <div class="images">
+        <img src="images/Screenshot 2025-08-02 221237.png" alt="Sample Image">
+        <img src="images/Screenshot 2025-08-02 221306.png" alt="Sample Image">
+        <img src="images/Screenshot 2025-08-02 221316.png" alt="Sample Image">
+      </div>
+    </section>
+    
+    <!-- Project 3 -->
+    <section>
+      <h2>GDP & relation with Forest Area</h2>
+      <ul>
+        <li>Analyzed WDI data for 82 selected countries.</li>
+        <li>Established relationship using econometric modeling and visualization.</li>
+        <li>Confirmed presence of EKC (Environmental Kuznets Curve) hypothesis.</li>
+      </ul>
+      <div class="images">
+        <img src="images/Screenshot 2025-08-02 221507.png" alt="Sample Image">
+        <img src="images/Screenshot 2025-08-02 221516.png" alt="Sample Image">
+        <img src="images/Screenshot 2025-08-02 221557.png" alt="Sample Image">
+      </div>
+    </section>
+
+    <!-- Project 4 -->
+    <section>
+      <h2>Estimating PCGDP of Singapore</h2>
+      <ul>
+        <li>Used 15yr World Bank data for analysis.</li>
+        <li>Assessed Linearity using visualization.</li>
+        <li>Estimated per capita GDP using Regression.</li>
+      </ul>
+      <div class="images">
+        <img src="images/Screenshot 2025-08-02 222236.png" alt="Sample Image">
+        <img src="images/Screenshot 2025-08-02 222255.png" alt="Sample Image">
+        <img src="images/Screenshot 2025-08-02 222321.png" alt="Sample Image">
+      </div>
+    </section>
+
+    <!-- Project 5 -->
+    <section>
+      <h2>Analysis of IHDS data</h2>
+      <ul>
+        <li>Worked on IHDS survey data focusing on demographics.</li>
+        <li>Applied regression models with interaction terms to examine socioeconomic determinants to investigate the impact of English language knowledge on wages.</li>
+        <li>Used spatial visualization techniques to analyze regional disparities.</li>
+      </ul>
+      <div class="images">
+        <img src="images/image.png" alt="Sample Image">
+      </div>
+    </section>
+  </main>
+</section>
+
+<a href="https://github.com/dilipkumaar12123" target="_blank" class="btn">View more on GitHub</a>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+<!-- Contact Section 4 -->
+<section id="contact">
+  <ul>
+    <!-- LinkedIn -->
+    <li>
+      <a href="https://www.linkedin.com/in/dilipkumaar-narayanan" target="_blank">
+        <i class="fab fa-linkedin-in icon"></i>
+      </a>
+    </li>
+
+    <!-- Email -->
+    <li>
+      <a href="mailto:dilipkumaar@yahoo.com">
+        <i class="fas fa-envelope icon"></i>
+      </a>
+    </li>
+
+    <!-- WhatsApp -->
+    <li>
+      <a href="https://wa.me/+917358563073" target="_blank">
+        <i class="fab fa-whatsapp icon"></i>
+      </a>
+    </li>
+
+    <!-- GitHub -->
+    <li>
+      <a href="https://github.com/dilipkumaar12123" target="_blank">
+        <i class="fab fa-github icon"></i>
+      </a>
+    </li>
+  </ul>
+</section>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+  <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+  <script>
+    // Vanta background for intro
+    VANTA.NET({
+      el: "#intro",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color: 0xffffff,
+      backgroundColor: 0x000000
+    });
+
+    // Fade in/out on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0.4 });
+
+    document.querySelectorAll('.fade-element').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
+<!-- End of HTML Document -->
